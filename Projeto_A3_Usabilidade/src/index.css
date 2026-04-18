@@ -1,0 +1,74 @@
+/* Reset e base global */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Cores do projeto */
+  --color-bg: #f4f6fb;
+  --color-surface: #ffffff;
+  --color-text: #1a1d2e;
+  --color-text-muted: #6b7280;
+  --color-border: #dde3f0;
+  --color-primary: #3b5bdb;
+  --color-primary-light: rgba(59, 91, 219, 0.1);
+  --color-danger: #cf1322;
+  --color-danger-light: rgba(207, 19, 34, 0.08);
+  --color-success: #2d9a5f;
+
+  /* Dark mode */
+  --color-bg-dark: #0b0e1a;
+  --color-surface-dark: #161929;
+  --color-text-dark: #e8ecf4;
+  --color-border-dark: #2a2f4a;
+
+  /* Tipografia */
+  --font-sans: 'Sora', 'Segoe UI', system-ui, sans-serif;
+
+  /* Bordas */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Foco visível global [WCAG 2.4.7] */
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Remove outline padrão apenas quando não é teclado */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Imagens responsivas */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Links */
+a {
+  color: var(--color-primary);
+}

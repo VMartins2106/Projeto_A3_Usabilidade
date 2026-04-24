@@ -1,0 +1,43 @@
+/* [H7] Flexibilidade e eficiência — filtros para usuários avançados
+   [H5] Prevenção de erros — valores padrão seguros */
+
+.panel {
+  background: var(--panel-bg);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+/* [H6] Rótulo visível — não depende só de placeholder */
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.input {
+  background: var(--input-bg);
+  color: inherit;
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.75rem;
+  font-size: 14px;
+  width: 100%;
+  font-family: inherit;
+}
+
+.input:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+/* [H10] Dica inline */
+.hint {
+  font-size: 11px;
+  opacity: 0.5;
+  margin: 3px 0 0;
+}

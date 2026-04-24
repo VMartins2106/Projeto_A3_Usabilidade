@@ -1,0 +1,11 @@
+/* Contexto de tema — wrapper global
+   [H3] Controle do usuário: pode alternar o tema
+   [WCAG 1.4.3] Respeita preferência do sistema */
+
+.wrapper {
+  min-height: 100vh;
+  background: var(--theme-bg);
+  color: var(--theme-color);
+  font-family: 'Sora', 'Segoe UI', sans-serif;
+  transition: background 0.3s, color 0.3s;
+}

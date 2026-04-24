@@ -1,0 +1,137 @@
+/* Página: Asteroides Próximos à Terra
+   [H5] Prevenção de erros — validação de range de datas
+   [H7] Filtros de data flexíveis
+   [H8] Tabela minimalista */
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* Filtros de data [H7, H5] */
+.filters {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.dateInput {
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: inherit;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.dateInput:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+/* [H5, H9] Erro de validação de range */
+.rangeError {
+  background: #fff1f0;
+  border: 1px solid #ffa39e;
+  color: var(--color-danger);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 1rem;
+  font-size: 14px;
+  margin-bottom: 1rem;
+}
+
+/* [H1] Cards de resumo */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.statCard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  text-align: center;
+}
+
+.statValue {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: var(--stat-color);
+}
+
+.statLabel {
+  font-size: 12px;
+  opacity: 0.6;
+  margin: 0;
+}
+
+/* Tabela [H8] */
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--card-border);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.thead tr {
+  background: var(--thead-bg);
+  text-align: left;
+}
+
+.th {
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.tr {
+  border-top: 0.5px solid var(--card-border);
+  background: var(--row-bg, transparent);
+}
+
+.td {
+  padding: 0.65rem 1rem;
+}
+
+.tdMuted {
+  padding: 0.65rem 1rem;
+  opacity: 0.8;
+}
+
+.tdBold {
+  padding: 0.65rem 1rem;
+  font-weight: 500;
+}
+
+.pagination {
+  font-size: 12px;
+  opacity: 0.5;
+  margin-top: 8px;
+  text-align: right;
+}

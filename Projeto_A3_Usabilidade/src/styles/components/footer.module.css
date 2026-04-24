@@ -1,0 +1,20 @@
+/* [H4] Consistência — rodapé igual em todas as páginas
+   [H10] Créditos e documentação */
+
+.footer {
+  margin-top: 4rem;
+  border-top: 1px solid var(--footer-border);
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.link {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.link:hover {
+  opacity: 0.8;
+}

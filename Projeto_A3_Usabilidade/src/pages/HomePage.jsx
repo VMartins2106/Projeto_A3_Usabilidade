@@ -60,7 +60,7 @@ export default function HomePage() {
           />
           {/* [H10] Dicas inline — corrigido: IDs únicos */}
           <p id="date-hint-1" className={styles.hint}>Disponível desde 16/06/1995</p>
-          <p id="date-hint-2" className={styles.hint}>Disponibilização em D-1</p>
+          <p id="date-hint-2" className={styles.hint}>Disponibilização em dia - 1 (até ontem)</p>
         </div>
       </div>
 

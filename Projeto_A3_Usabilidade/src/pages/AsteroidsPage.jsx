@@ -118,7 +118,7 @@ export default function AsteroidsPage() {
               </div>
             ))}
           </div>
-
+          <p id="date-hint-1" className={styles.hint}>(km = kilometros / s = segundos )</p>
           {/* Tabela [H8] */}
           <div className={styles.tableWrapper}>
             <table
@@ -127,7 +127,7 @@ export default function AsteroidsPage() {
             >
               <thead className={styles.thead}>
                 <tr>
-                  {["Nome", "Diâmetro est. (km)", "Vel. (km/s)", "Perigoso?"].map((h) => (
+                  {["Nome", "Diâmetro estimado (km)", "Velocidade (km/s)", "Perigoso?"].map((h) => (
                     <th key={h} scope="col" className={styles.th}>{h}</th>
                   ))}
                 </tr>

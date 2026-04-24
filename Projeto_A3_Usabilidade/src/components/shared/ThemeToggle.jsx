@@ -19,7 +19,7 @@ export default function ThemeToggle() {
       className={styles.button}
     >
       {dark ? "☀️" : "🌙"}
-      <span className={styles.label}>{dark ? "Claro" : "Escuro"}</span>
+      <span className={styles.label}>{dark ? "Tema: Claro" : "Tema: Escuro"}</span>
     </button>
   );
 }

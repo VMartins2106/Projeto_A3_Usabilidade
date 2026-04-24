@@ -1,0 +1,56 @@
+/* [H3] Controle: usuário fecha quando quiser (Esc ou ×)
+   [WCAG 2.1.1] Foco preso dentro do modal */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.content {
+  background: #1a1d2e;
+  color: #e8ecf4;
+  border-radius: 16px;
+  padding: 1.5rem;
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  outline: none;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* [H3] Botão de fechar visível e acessível */
+.closeButton {
+  background: transparent;
+  border: none;
+  color: #a0aec0;
+  font-size: 22px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.closeButton:hover {
+  color: #e8ecf4;
+}

@@ -1,0 +1,45 @@
+/* [H4] Consistência — navegação igual em todas as páginas
+   [WCAG 4.1.2] aria-current na página ativa
+   [WCAG 2.4.7] Foco visível */
+
+.nav {
+  background: var(--nav-bg, #1e2235);
+  display: flex;
+  gap: 4px;
+  padding: 0.5rem 1.5rem;
+}
+
+.button {
+  background: transparent;
+  color: #a0aec0;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 1rem;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.button:hover {
+  color: #7c9ef5;
+  background: rgba(124, 158, 245, 0.08);
+}
+
+/* [WCAG 2.4.7] Foco visível por teclado */
+.button:focus-visible {
+  box-shadow: 0 0 0 3px rgba(124, 158, 245, 0.5);
+  outline: none;
+}
+
+/* Página ativa [WCAG 4.1.2] */
+.active {
+  background: rgba(124, 158, 245, 0.15);
+  color: #7c9ef5;
+  border-color: rgba(124, 158, 245, 0.4);
+  font-weight: 600;
+}

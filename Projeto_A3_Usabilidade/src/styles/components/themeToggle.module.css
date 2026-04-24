@@ -1,0 +1,25 @@
+/* [H3] Controle do usuário: alterna tema
+   [H10] Tooltip de ajuda via title
+   [WCAG 2.1.1] Acessível por teclado */
+
+.button {
+  background: transparent;
+  border: 1.5px solid currentColor;
+  border-radius: var(--radius-sm);
+  padding: 0.35rem 0.75rem;
+  cursor: pointer;
+  font-size: 16px;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 0.2s;
+}
+
+.button:hover {
+  opacity: 0.75;
+}
+
+.label {
+  font-size: 13px;
+}

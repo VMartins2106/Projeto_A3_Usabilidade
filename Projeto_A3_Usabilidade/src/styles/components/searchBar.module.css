@@ -1,0 +1,54 @@
+/* [H5] Prevenção de erros
+   [H1] Status inline de resultados
+   [WCAG 4.1.2] Label visível associada ao input */
+
+.container {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem 2.5rem 0.5rem 0.75rem;
+  font-size: 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: inherit;
+  box-sizing: border-box;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+  border-color: var(--color-primary);
+}
+
+/* [H1] Ícone de loading no input */
+.loadingIcon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+}
+
+/* [H1] Status de resultado */
+.status {
+  font-size: 12px;
+  opacity: 0.6;
+  margin: 4px 0 0;
+}

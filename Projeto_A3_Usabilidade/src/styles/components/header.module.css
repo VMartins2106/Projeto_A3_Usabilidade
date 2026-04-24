@@ -1,0 +1,41 @@
+/* [H1] Visibilidade do status — página atual sempre visível
+   [H4] Consistente em todas as páginas */
+
+.header {
+  background: var(--header-bg, #1a1d2e);
+  color: #e8ecf4;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* [H4] Logo consistente em todas as páginas */
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.logoAccent {
+  color: #7c9ef5;
+}
+
+/* [H1] Breadcrumb — título da página atual */
+.breadcrumb {
+  font-size: 13px;
+  background: rgba(124, 158, 245, 0.2);
+  color: #7c9ef5;
+  padding: 2px 10px;
+  border-radius: 20px;
+}

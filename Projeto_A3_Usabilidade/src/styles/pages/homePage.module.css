@@ -1,0 +1,127 @@
+/* Página: Astronomy Picture of the Day
+   [H5] Prevenção de erros — range de datas limitado
+   [WCAG 1.1.1] Alt em imagens
+   [WCAG 2.1.1] Teclado */
+
+.controls {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.dateInput {
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--input-border);
+  background: var(--input-bg);
+  color: inherit;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.dateInput:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+.hint {
+  font-size: 11px;
+  opacity: 0.5;
+  margin: 3px 0 0;
+}
+
+/* Grid principal imagem + texto */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Coluna da imagem */
+.figure {
+  margin: 0;
+}
+
+.image {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  display: block;
+  cursor: zoom-in;
+  transition: opacity 0.2s;
+}
+
+.image:hover {
+  opacity: 0.92;
+}
+
+/* [H10] Hint de interação */
+.figcaption {
+  font-size: 11px;
+  opacity: 0.5;
+  margin-top: 6px;
+  text-align: center;
+}
+
+.videoWrapper {
+  aspect-ratio: 16 / 9;
+}
+
+.iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-lg);
+  border: none;
+}
+
+/* Coluna do texto */
+.title {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0.5rem 0 0.25rem;
+  line-height: 1.2;
+}
+
+.meta {
+  font-size: 13px;
+  opacity: 0.55;
+  margin-bottom: 1rem;
+}
+
+.explanation {
+  font-size: 15px;
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
+.hdLink {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #7c9ef5;
+  font-size: 13px;
+  text-decoration: underline;
+}
+
+.hdLink:hover {
+  opacity: 0.8;
+}
+
+.modalImage {
+  width: 100%;
+  border-radius: var(--radius-sm);
+}

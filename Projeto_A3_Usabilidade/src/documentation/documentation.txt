@@ -1,0 +1,25 @@
+/**
+ * NASA Space Explorer
+ * Projeto de Usabilidade — React + NASA Open API (sem cadastro)
+ *
+ * Heurísticas de Nielsen aplicadas (marcadas com [H1]–[H10]):
+ *  H1  Visibilidade do status do sistema
+ *  H2  Correspondência entre o sistema e o mundo real
+ *  H3  Controle e liberdade do usuário
+ *  H4  Consistência e padrões
+ *  H5  Prevenção de erros
+ *  H6  Reconhecimento em vez de memorização
+ *  H7  Flexibilidade e eficiência de uso
+ *  H8  Estética e design minimalista
+ *  H9  Ajuda aos usuários a reconhecer, diagnosticar e se recuperar de erros
+ *  H10 Ajuda e documentação
+ *
+ * WCAG aplicados (marcados com [WCAG X.X.X]):
+ *  1.1.1  Alternativas em texto (alt em imagens)
+ *  1.4.3  Contraste mínimo
+ *  2.1.1  Teclado
+ *  2.4.1  Ignorar blocos (SkipLink)
+ *  2.4.7  Foco visível
+ *  4.1.2  Nome, função, valor (aria-*)
+ *  4.1.3  Mensagens de status (aria-live)
+ */

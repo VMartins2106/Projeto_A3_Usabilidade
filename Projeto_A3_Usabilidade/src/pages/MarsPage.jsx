@@ -41,6 +41,8 @@ import SearchBar from "../components/shared/SearchBar";
 import Modal from "../components/shared/Modal";
 import styles from '../styles/pages/marsPage.module.css';
 
+import { formatDatePtBR, translateCenter } from "../utils/translate";
+
 const IMAGES_URL = "https://images-api.nasa.gov";
 
 export default function MarsPage() {
@@ -160,7 +162,7 @@ export default function MarsPage() {
               {selected.data?.[0]?.description}
             </p>
             <p className={styles.modalMeta}>
-              {selected.data?.[0]?.date_created?.slice(0, 10)} · {selected.data?.[0]?.center}
+              {formatDatePtBR(selected.data?.[0]?.date_created)} · {translateCenter(selected.data?.[0]?.center)}
             </p>
           </div>
         )}

@@ -16,6 +16,7 @@ import ErrorMessage from "../components/shared/ErrorMessage";
 import Badge from "../components/shared/Badge";
 import Modal from "../components/shared/Modal";
 import styles from '../styles/pages/homePage.module.css';
+import { translateMediaType, formatDatePtBR } from "../utils/translate";
 
 export default function HomePage() {
   const { dark } = useContext(ThemeContext);
@@ -102,7 +103,7 @@ export default function HomePage() {
           {/* Texto */}
           <div>
             <Badge color="#e67e00">
-              {data.media_type === "image" ? "Imagem" : "Vídeo"}
+              {translateMediaType(data.media_type)}
             </Badge>
             <h1 id="apod-title" className={styles.title}>
               {data.title}

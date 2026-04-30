@@ -7,7 +7,7 @@
 // [WCAG 2.1.1] Teclado
 // ─────────────────────────────────────────────
 
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { NASA_KEY, BASE_URL } from "../constants/index";
 import { ThemeContext } from "../context/ThemeContext";
 import { useFetch } from "../hooks/useFetch";
@@ -16,8 +16,23 @@ import ErrorMessage from "../components/shared/ErrorMessage";
 import Badge from "../components/shared/Badge";
 import Modal from "../components/shared/Modal";
 import styles from '../styles/pages/homePage.module.css';
+import { translateMediaType, formatDatePtBR } from "../utils/translate";
+
+import { useTranslate } from "../hooks/useTranslate";
+import TranslateButton from "../components/shared/TranslateButton";
 
 export default function HomePage() {
+
+  // ... estados existentes
+  const { translate, getText, isLoading, isTranslated, reset } = useTranslate();
+
+  const handleTranslate = () => {
+    translate(
+      ["apod-title", "apod-explanation"],
+      [data.title, data.explanation]
+    );
+  };
+
   const { dark } = useContext(ThemeContext);
   const [date, setDate] = useState(() => {
     const d = new Date();
@@ -25,6 +40,11 @@ export default function HomePage() {
     return d.toISOString().split("T")[0];
   });
   const [modalOpen, setModalOpen] = useState(false);
+
+    // Reseta traduções quando a data muda
+  useEffect(() => {
+    reset();
+  }, [date]);
 
   const url = `${BASE_URL}/planetary/apod?api_key=${NASA_KEY}&date=${date}`;
   const { data, loading, error } = useFetch(url);
@@ -102,18 +122,29 @@ export default function HomePage() {
           {/* Texto */}
           <div>
             <Badge color="#e67e00">
-              {data.media_type === "image" ? "Imagem" : "Vídeo"}
+              {translateMediaType(data.media_type)}
             </Badge>
+
+              {/* Botão alinhado à direita [H3] */}
+              <div className={styles.translateWrapper}>
+                {/* Botão de tradução [H3] */}
+                <TranslateButton
+                  onTranslate={handleTranslate}
+                  loading={isLoading("apod-title") || isLoading("apod-explanation")}
+                  translated={isTranslated("apod-title")}
+                />
+              </div>
+
             <h1 id="apod-title" className={styles.title}>
-              {data.title}
+              {getText("apod-title", data.title)}
             </h1>
             <p className={styles.meta}>
-              📅 {new Date(data.date + "T12:00:00").toLocaleDateString("pt-BR", {
-                day: "2-digit", month: "long", year: "numeric",
-              })}
+              📅 {formatDatePtBR(data.date)}
               {data.copyright && ` · © ${data.copyright}`}
             </p>
-            <p className={styles.explanation}>{data.explanation}</p>
+            <p className={styles.explanation}>
+              {getText("apod-explanation", data.explanation)}
+            </p>
             {data.hdurl && (
               <a
                 href={data.hdurl}
@@ -129,9 +160,9 @@ export default function HomePage() {
       )}
 
       {/* Modal de imagem ampliada [H3] */}
-      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={data?.title || ""}>
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={getText("apod-title", data?.title || "")}>
         {data?.hdurl && (
-          <img src={data.hdurl} alt={data.title} className={styles.modalImage} />
+          <img src={data.hdurl} alt={getText("apod-title", data.title)} className={styles.modalImage} />
         )}
       </Modal>
     </section>

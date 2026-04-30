@@ -43,7 +43,7 @@ export default function SearchBar({ value, onChange, resultCount, loading }) {
         {resultCount !== null
           ? resultCount === 0
             ? "Nenhum resultado encontrado."
-            : `${resultCount} resultado${resultCount !== 1 ? "s" : ""} encontrado${resultCount !== 1 ? "s" : ""}.`
+            : `${resultCount} resultado${resultCount !== 1 ? "s" : ""} encontrado${resultCount !== 1 ? "s" : ""} — Clique no card para expandir e traduzir!`
           : ""}
       </p>
     </div>

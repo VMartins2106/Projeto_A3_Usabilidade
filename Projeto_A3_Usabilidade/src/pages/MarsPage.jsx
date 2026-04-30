@@ -31,32 +31,63 @@
 //mars orbiter — imagens do espaço
 //mars atmosphere — atmosfera
 
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "../context/ThemeContext";
 import { useFetch } from "../hooks/useFetch";
 import { useDebounce } from "../hooks/useDebounce";
+import { useTranslate } from "../hooks/useTranslate";
 import LoadingSpinner from "../components/shared/LoadingSpinner";
 import ErrorMessage from "../components/shared/ErrorMessage";
 import SearchBar from "../components/shared/SearchBar";
 import Modal from "../components/shared/Modal";
+import TranslateButton from "../components/shared/TranslateButton";
 import styles from '../styles/pages/marsPage.module.css';
+import { formatDatePtBR, translateCenter } from "../utils/translate";
 
 const IMAGES_URL = "https://images-api.nasa.gov";
 
+// [H2] Termos de busca em português → inglês para a API
+const SEARCH_TERMS = {
+  "rover curiosity": "curiosity",
+  "rover perseverance": "perseverance",
+  "rover opportunity": "opportunity",
+  "rover spirit": "spirit",
+  "crateras marcianas": "mars crater",
+  "paisagens de marte": "mars landscape",
+  "rochas marcianas": "mars rock",
+  "tempestade de poeira": "mars dust storm",
+  "helicóptero ingenuity": "mars helicopter",
+  "amostras de marte": "mars sample",
+  "solo marciano": "mars soil",
+  "órbita de marte": "mars orbiter",
+  "atmosfera de marte": "mars atmosphere",
+};
+
+// Converte termo PT → EN para a API se existir mapeamento
+const toApiTerm = (term) => SEARCH_TERMS[term.toLowerCase()] || term;
+
 export default function MarsPage() {
   const { dark } = useContext(ThemeContext);
-  const [search, setSearch] = useState("mars rover");
+
+  const [search, setSearch] = useState("rover curiosity");
   const [selected, setSelected] = useState(null);
   const [selectedMedia, setSelectedMedia] = useState(null);
+
+  const { translate, getText, isLoading, isTranslated, reset } = useTranslate();
 
   const debouncedSearch = useDebounce(search, 600);
 
   const url = debouncedSearch
-    ? `${IMAGES_URL}/search?q=${encodeURIComponent(debouncedSearch)}&media_type=image&page_size=24`
+    ? `${IMAGES_URL}/search?q=${encodeURIComponent(toApiTerm(debouncedSearch))}&media_type=image&page_size=24`
     : null;
 
   const { data, loading, error } = useFetch(url);
   const items = data?.collection?.items || [];
+
+  // Reseta tradução ao fechar modal [H3]
+  useEffect(() => {
+    if (!selected) reset();
+  }, [selected]);
 
   const handleCardClick = async (item) => {
     setSelected(item);
@@ -73,6 +104,16 @@ export default function MarsPage() {
   const handleClose = () => {
     setSelected(null);
     setSelectedMedia(null);
+  };
+
+  const handleTranslate = () => {
+    translate(
+      ["modal-title", "modal-description"],
+      [
+        selected?.data?.[0]?.title,
+        selected?.data?.[0]?.description,
+      ]
+    );
   };
 
   return (
@@ -97,7 +138,7 @@ export default function MarsPage() {
           <p className={styles.emptyIcon} aria-hidden="true">🏜️</p>
           <p>Nenhuma imagem encontrada.</p>
           <p className={styles.emptyHint}>
-            Tente buscar por "curiosity", "perseverance" ou "mars".
+            Tente buscar por "rover curiosity", "paisagens de marte" ou "helicóptero ingenuity".
           </p>
         </div>
       )}
@@ -129,9 +170,11 @@ export default function MarsPage() {
                   />
                 )}
                 <div className={styles.cardBody}>
+                  {/* Título e data do card — mantidos em inglês pois são muitos */}
                   <h3 className={styles.cardTitle}>{meta?.title}</h3>
                   <p className={styles.cardDate}>
-                    {meta?.date_created?.slice(0, 10)}
+                    {/* [H2] Data formatada em pt-BR */}
+                    {formatDatePtBR(meta?.date_created)}
                   </p>
                 </div>
               </article>
@@ -143,24 +186,34 @@ export default function MarsPage() {
       <Modal
         open={!!selected}
         onClose={handleClose}
-        title={selected?.data?.[0]?.title || "Imagem"}
+        title={getText("modal-title", selected?.data?.[0]?.title || "Imagem")}
       >
         {selected && (
           <div>
             {selectedMedia ? (
               <img
                 src={selectedMedia}
-                alt={selected.data?.[0]?.title}
+                alt={getText("modal-title", selected.data?.[0]?.title)}
                 className={styles.modalImage}
               />
             ) : (
               <LoadingSpinner label="Carregando imagem..." />
             )}
+
+            {/* Botão de tradução alinhado à direita [H3] */}
+            <div className={styles.translateWrapper}>
+              <TranslateButton
+                onTranslate={handleTranslate}
+                loading={isLoading("modal-title") || isLoading("modal-description")}
+                translated={isTranslated("modal-title")}
+              />
+            </div>
+
             <p className={styles.modalDescription}>
-              {selected.data?.[0]?.description}
+              {getText("modal-description", selected.data?.[0]?.description)}
             </p>
             <p className={styles.modalMeta}>
-              {selected.data?.[0]?.date_created?.slice(0, 10)} · {selected.data?.[0]?.center}
+              {formatDatePtBR(selected.data?.[0]?.date_created)} · {translateCenter(selected.data?.[0]?.center)}
             </p>
           </div>
         )}

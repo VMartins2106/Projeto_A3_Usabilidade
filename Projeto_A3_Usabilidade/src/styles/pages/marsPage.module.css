@@ -9,6 +9,12 @@
   margin-bottom: 1rem;
 }
 
+.translateWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0.75rem 0;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));

@@ -39,6 +39,12 @@
   margin: 3px 0 0;
 }
 
+.translateWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}
+
 /* Grid principal imagem + texto */
 .grid {
   display: grid;

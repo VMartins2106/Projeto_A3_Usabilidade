@@ -61,7 +61,11 @@ export function translateCameraName(name) {
 
 export function formatDatePtBR(dateStr) {
   if (!dateStr) return "";
-  return new Date(dateStr + "T12:00:00").toLocaleDateString("pt-BR", {
+  
+  // Remove qualquer horário existente e pega só a data
+  const dateOnly = dateStr.split("T")[0];
+  
+  return new Date(dateOnly + "T12:00:00").toLocaleDateString("pt-BR", {
     day: "2-digit",
     month: "long",
     year: "numeric",

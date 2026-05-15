@@ -38,7 +38,6 @@ import { useDebounce } from "../hooks/useDebounce";
 import { useTranslate } from "../hooks/useTranslate";
 import LoadingSpinner from "../components/shared/LoadingSpinner";
 import ErrorMessage from "../components/shared/ErrorMessage";
-import SearchBar from "../components/shared/SearchBar";
 import Modal from "../components/shared/Modal";
 import TranslateButton from "../components/shared/TranslateButton";
 import styles from '../styles/pages/marsPage.module.css';
@@ -82,7 +81,44 @@ export default function MarsPage() {
     : null;
 
   const { data, loading, error } = useFetch(url);
-  const items = data?.collection?.items || [];
+  const rawItems = data?.collection?.items || [];
+
+  // Remove duplicidades
+  const items = rawItems.filter((item, index, self) => {
+    const meta = item.data?.[0];
+
+    // Normaliza título
+    const normalizedTitle = meta?.title
+      ?.toLowerCase()
+      .trim()
+      .replace(/\s+/g, " ");
+
+    // Thumbnail sem query params
+    const thumb = item.links?.[0]?.href
+      ?.split("?")[0]
+      .toLowerCase();
+
+    return (
+      index ===
+      self.findIndex((i) => {
+        const compareMeta = i.data?.[0];
+
+        const compareTitle = compareMeta?.title
+          ?.toLowerCase()
+          .trim()
+          .replace(/\s+/g, " ");
+
+        const compareThumb = i.links?.[0]?.href
+          ?.split("?")[0]
+          .toLowerCase();
+
+        return (
+          compareTitle === normalizedTitle ||
+          compareThumb === thumb
+        );
+      })
+    );
+  });
 
   // Reseta tradução ao fechar modal [H3]
   useEffect(() => {
@@ -122,12 +158,84 @@ export default function MarsPage() {
         🔴 Galeria de Marte — NASA Image Library
       </h1>
 
-      <SearchBar
+      <div className={styles.selectWrapper}>
+      <label htmlFor="mars-select" className={styles.selectLabel}>
+        Escolha um tema de Marte
+      </label>
+
+      <select
+        id="mars-select"
         value={search}
-        onChange={setSearch}
-        resultCount={!loading && items.length ? items.length : null}
-        loading={loading}
-      />
+        onChange={(e) => setSearch(e.target.value)}
+        className={styles.select}
+      >
+        <optgroup label="Rovers e missões">
+          <option value="rover curiosity">
+            Curiosity
+          </option>
+
+          <option value="rover perseverance">
+            Perseverance
+          </option>
+
+          <option value="rover opportunity">
+            Opportunity
+          </option>
+
+          <option value="rover spirit">
+            Spirit
+          </option>
+        </optgroup>
+
+        <optgroup label="Locais e geologia">
+          <option value="crateras marcianas">
+            Crateras marcianas
+          </option>
+
+          <option value="paisagens de marte">
+            Paisagens de Marte
+          </option>
+
+          <option value="rochas marcianas">
+            Rochas marcianas
+          </option>
+
+          <option value="tempestade de poeira">
+            Tempestade de poeira
+          </option>
+        </optgroup>
+
+        <optgroup label="Equipamentos">
+          <option value="helicóptero ingenuity">
+            Helicóptero Ingenuity
+          </option>
+
+          <option value="amostras de marte">
+            Amostras de Marte
+          </option>
+
+          <option value="solo marciano">
+            Solo marciano
+          </option>
+        </optgroup>
+
+        <optgroup label="Missões orbitais">
+          <option value="órbita de marte">
+            Órbita de Marte
+          </option>
+
+          <option value="atmosfera de marte">
+            Atmosfera de Marte
+          </option>
+        </optgroup>
+      </select>
+
+      {!loading && items.length > 0 && (
+        <p className={styles.results}>
+          {items.length} resultados encontrados
+        </p>
+      )}
+    </div>
 
       {loading && <LoadingSpinner label="Buscando imagens da NASA..." />}
       {error && <ErrorMessage message={error} />}

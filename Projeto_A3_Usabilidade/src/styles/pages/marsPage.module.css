@@ -102,3 +102,45 @@
   opacity: 0.5;
   margin-top: 8px;
 }
+
+.selectWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.selectLabel {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.select {
+  width: 100%;
+  padding: 0.9rem 1rem;
+
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+
+  background: var(--color-surface);
+  color: var(--color-text);
+
+  font-size: 15px;
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+.results {
+  font-size: 14px;
+  opacity: 0.75;
+}
